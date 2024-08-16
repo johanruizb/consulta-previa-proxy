@@ -29,13 +29,13 @@ if (process.env.NODE_ENV === "production") {
     app.use(
         cors({
             origin: ["https://registro-consulta-previa.onrender.com"],
-        })
+        }),
     );
 } else {
     app.use(
         cors({
             origin: ["http://localhost:7153"],
-        })
+        }),
     );
 }
 

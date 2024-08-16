@@ -13,7 +13,7 @@ router.get("/countries", async function (req, res, next) {
                 headers: {
                     "X-CSCAPI-KEY": process.env["X-CSCAPI-KEY"],
                 },
-            }
+            },
         );
 
         res.header("Cache-Control", "public, max-age=604800");
@@ -34,7 +34,7 @@ router.get("/countries/:isoCode/states", async function (req, res, next) {
                 headers: {
                     "X-CSCAPI-KEY": process.env["X-CSCAPI-KEY"],
                 },
-            }
+            },
         );
 
         res.header("Cache-Control", "public, max-age=604800");
@@ -57,7 +57,7 @@ router.get(
                     headers: {
                         "X-CSCAPI-KEY": process.env["X-CSCAPI-KEY"],
                     },
-                }
+                },
             );
             res.header("Cache-Control", "public, max-age=604800");
             const data = await result.json();
@@ -66,7 +66,7 @@ router.get(
             console.error(error);
             next(createError(500));
         }
-    }
+    },
 );
 
 module.exports = router;
