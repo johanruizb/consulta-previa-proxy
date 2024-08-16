@@ -22,7 +22,7 @@
                 },
                 {
                     "key": "Access-Control-Allow-Origin",
-                    "value": "https://registro-consulta-previa.onrender.com"
+                    "value": "*"
                 },
                 {
                     "key": "Access-Control-Allow-Methods",
