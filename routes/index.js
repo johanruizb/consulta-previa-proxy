@@ -11,7 +11,7 @@ router.get("/countries", async function (req, res, next) {
             "https://api.countrystatecity.in/v1/countries",
             {
                 headers: {
-                    "X-CSCAPI-KEY": process.env["X-CSCAPI-KEY"],
+                    "X-CSCAPI-KEY": process.env.X_CSCAPI_KEY,
                 },
             },
         );
@@ -32,7 +32,7 @@ router.get("/countries/:isoCode/states", async function (req, res, next) {
             `https://api.countrystatecity.in/v1/countries/${req.params.isoCode}/states`,
             {
                 headers: {
-                    "X-CSCAPI-KEY": process.env["X-CSCAPI-KEY"],
+                    "X-CSCAPI-KEY": process.env.X_CSCAPI_KEY,
                 },
             },
         );
@@ -55,7 +55,7 @@ router.get(
                 `https://api.countrystatecity.in/v1/countries/${req.params.isoCode}/states/${req.params.stateCode}/cities`,
                 {
                     headers: {
-                        "X-CSCAPI-KEY": process.env["X-CSCAPI-KEY"],
+                        "X-CSCAPI-KEY": process.env.X_CSCAPI_KEY,
                     },
                 },
             );

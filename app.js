@@ -24,21 +24,12 @@ const limiter = rateLimit({
     // store: ... , // Redis, Memcached, etc. See below.
 });
 
-//  apply to all requests
-if (process.env.NODE_ENV === "production") {
-    app.use(
-        cors({
-            origin: ["https://registro-consulta-previa.onrender.com"],
-        }),
-    );
-} else {
-    app.use(
-        cors({
-            origin: ["http://localhost:7153"],
-        }),
-    );
-}
+const origin =
+    app.get("env") == "development"
+        ? "http://localhost:7153"
+        : "https://registro-consulta-previa.onrender.com";
 
+app.use(cors({ origin: origin, credentials: true }));
 app.use(limiter);
 app.use(logger("dev"));
 app.use(express.json());
