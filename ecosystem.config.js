@@ -6,6 +6,10 @@ module.exports = {
             instances: "max",
             script: "./bin/www",
             autorestart: true,
+            env_production: {
+                NODE_ENV: "production",
+                PORT: 3000,
+            },
         },
     ],
 
