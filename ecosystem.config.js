@@ -3,7 +3,7 @@ module.exports = {
         {
             name: "app",
             mode: "cluster",
-            instances: 2,
+            instances: "max",
             script: "./bin/www",
             autorestart: true,
             env_production: {
