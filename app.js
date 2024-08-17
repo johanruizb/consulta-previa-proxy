@@ -39,7 +39,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
     express.static(path.join(__dirname, "dist"), {
         setHeaders: (res, path) => {
-            if (path.endsWith(".js")) {
+            if (
+                path.endsWith(".js") ||
+                path.endsWith(".css") ||
+                path.endsWith(".woff") ||
+                path.endsWith(".woff2")
+            ) {
                 res.setHeader("Cache-Control", "public, max-age=31536000");
             }
         },
@@ -50,7 +55,8 @@ app.use("/v1", indexRouter);
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"));
+    // res.sendFile(path.join(__dirname, "dist", "index.html"));
+    res.redirect("/");
 });
 
 // catch 404 and forward to error handler
