@@ -5,6 +5,7 @@ module.exports = {
             mode: "cluster",
             instances: "max",
             script: "./bin/www",
+            autorestart: true,
         },
     ],
 
