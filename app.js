@@ -11,6 +11,13 @@ var indexRouter = require("./routes/index");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 
+const io = require("@pm2/io");
+
+io.init({
+    transactions: true, // will enable the transaction tracing
+    http: true, // will enable metrics about the http server (optional)
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
