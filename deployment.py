@@ -4,12 +4,8 @@ import paramiko
 root = os.path.dirname(os.path.abspath(__file__))
 ssh = paramiko.SSHClient()
 
-
-def compress_folder():
-    os.chdir(root)
-    if os.path.exists("proxy.zip"):
-        os.remove("proxy.zip")
-    os.system("7z a -tzip -r proxy.zip . -x!ssh -x!.git -x!node_modules -x!*.py -x!*.env -x!*.pem")
+PATH = "export PATH=/home/ubuntu/.nvm/versions/node/v20.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+PROJECT_PATH = "/home/ubuntu/registro-consulta-previa/source"
 
 
 def connect():
@@ -18,16 +14,10 @@ def connect():
     ssh.connect(hostname="172.24.144.93", username="ubuntu", key_filename=key_path)
 
 
-def upload():
-    sftp = ssh.open_sftp()
-    sftp.put("proxy.zip", "/home/ubuntu/proxy.zip")
-    sftp.close()
-
-
-def unzip():
-    ssh.exec_command("rm -rf /home/ubuntu/proxy !(node_modules) !(.env)")
+def fetch():
+    ssh.exec_command(f"cd {PROJECT_PATH} && git pull origin master")
     stdin_unzip, stdout_unzip, stderr_unzip = ssh.exec_command(
-        'export PATH="/home/ubuntu/.nvm/versions/node/v20.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin" && cd /home/ubuntu/ && unzip -qo /home/ubuntu/proxy.zip -d /home/ubuntu/proxy && cd proxy && npm i',
+        f"{PATH} && cd {PROJECT_PATH} && pm2 deploy ecosystem.config.js production update",
     )
     stdout_unzip.channel.recv_exit_status()
     stderr_unzip.channel.recv_exit_status()
@@ -40,10 +30,8 @@ def unzip():
 
 
 def deploy():
-    compress_folder()
     connect()
-    upload()
-    unzip()
+    fetch()
     ssh.close()
 
 
