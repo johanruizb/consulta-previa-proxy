@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: "registro-consulta-previa",
+            name: "app",
             mode: "cluster",
             instances: "max",
             script: "./bin/www",
