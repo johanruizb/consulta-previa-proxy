@@ -30,9 +30,12 @@ def fetch():
 
 
 def deploy():
-    connect()
-    fetch()
-    ssh.close()
+    os.system("git add ./dist/*")
+    os.system('git commit -m "Actualizar archivos estaticos"')
+    os.system("git push origin master")
+    # connect()
+    # fetch()
+    # ssh.close()
 
 
 if __name__ == "__main__":
