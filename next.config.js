@@ -9,11 +9,11 @@ const nextConfig = {
                     patterns: [
                         {
                             from: "node_modules/geoip-lite/data/geoip-country.dat",
-                            to: "data/geoip-country.dat",
+                            to: "/var/task/node_modules/geoip-lite/data/geoip-country.dat",
                         },
                         {
                             from: "node_modules/geoip-lite/data/geoip-country6.dat",
-                            to: "data/geoip-country6.dat",
+                            to: "/var/task/node_modules/geoip-lite/data/geoip-country6.dat",
                         },
                     ],
                 })
