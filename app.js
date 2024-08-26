@@ -21,7 +21,10 @@ io.init({
 const geoip = require("fast-geoip");
 
 const restrictToColombia = (req, res, next) => {
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const ip =
+        req.headers["cf-connecting-ip"] ||
+        req.headers["x-forwarded-for"] ||
+        req.connection.remoteAddress;
     const geo = geoip.lookup(ip);
 
     console.log("IP: ", ip);
