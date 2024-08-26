@@ -18,7 +18,7 @@ io.init({
     http: true, // will enable metrics about the http server (optional)
 });
 
-const geoip = require("geoip-lite");
+const geoip = require("fast-geoip");
 
 const restrictToColombia = (req, res, next) => {
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
