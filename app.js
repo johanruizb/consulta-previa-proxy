@@ -10,6 +10,7 @@ var app = express();
 var indexRouter = require("./routes/index");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
+const net = require("net");
 
 const io = require("@pm2/io");
 
@@ -19,30 +20,35 @@ io.init({
 });
 
 const geoip = require("fast-geoip");
+const { convertIPv6ToIPv4 } = require("./utils/ip-utils");
 
 const restrictToColombia = async (req, res, next) => {
-    const ip =
+    let ip =
         req.headers["cf-connecting-ip"] ||
         req.headers["x-forwarded-for"] ||
         req.connection.remoteAddress;
 
+    // Test IPv6 address like ::ffff:<IPv4> on development
+    if (app.get("env") === "development") {
+        ip = convertIPv6ToIPv4(ip);
+    }
+
     const geo = await geoip.lookup(ip);
 
-    console.log("IP: ", ip);
-    console.log("Geo: ", geo);
+    // console.log("IP: ", ip);
+    // console.log("Geo: ", geo);
 
     if (geo?.country === "CO") {
         next(); // Permite el acceso
     } else {
-        res.status(403).send(
-            "Acceso denegado: Solo se permite el ingreso desde Colombia."
+        next(
+            createError(
+                403,
+                "Acceso denegado: Solo se permite el ingreso desde Colombia."
+            )
         );
     }
 };
-
-// Usa el middleware en tu aplicación
-// if (app.get("env") == "production")
-// app.use(restrictToColombia);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -61,8 +67,13 @@ const origin =
         ? "http://localhost:7153"
         : "https://registro-consulta-previa.onrender.com";
 
-app.use(limiter);
-app.use(cors({ origin: origin, credentials: true }));
+// Usa el middleware en tu aplicación
+// if (app.get("env") == "production") {
+// app.use(limiter);
+app.use(restrictToColombia);
+// } else {
+//     app.use(cors({ origin: origin, credentials: true }));
+// }
 
 app.use(logger("dev"));
 app.use(express.json());
