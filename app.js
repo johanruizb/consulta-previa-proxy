@@ -18,6 +18,28 @@ io.init({
     http: true, // will enable metrics about the http server (optional)
 });
 
+const geoip = require("geoip-lite");
+
+const restrictToColombia = (req, res, next) => {
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const geo = geoip.lookup(ip);
+
+    console.log("IP: ", ip);
+    console.log("Geo: ", geo);
+
+    if (geo?.country === "CO") {
+        next(); // Permite el acceso
+    } else {
+        res.status(403).send(
+            "Acceso denegado: Solo se permite el ingreso desde Colombia."
+        );
+    }
+};
+
+if (app.get("env") == "production")
+    // Usa el middleware en tu aplicación
+    app.use(restrictToColombia);
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
