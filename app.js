@@ -20,12 +20,13 @@ io.init({
 
 const geoip = require("fast-geoip");
 
-const restrictToColombia = (req, res, next) => {
+const restrictToColombia = async (req, res, next) => {
     const ip =
         req.headers["cf-connecting-ip"] ||
         req.headers["x-forwarded-for"] ||
         req.connection.remoteAddress;
-    const geo = geoip.lookup(ip);
+
+    const geo = await geoip.lookup(ip);
 
     console.log("IP: ", ip);
     console.log("Geo: ", geo);
@@ -39,9 +40,9 @@ const restrictToColombia = (req, res, next) => {
     }
 };
 
-if (app.get("env") == "production")
-    // Usa el middleware en tu aplicación
-    app.use(restrictToColombia);
+// Usa el middleware en tu aplicación
+// if (app.get("env") == "production")
+// app.use(restrictToColombia);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
