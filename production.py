@@ -32,7 +32,7 @@ def fetch():
 def deploy():
     os.system("git add ./dist/*")
     os.system('git commit -m "Actualizar archivos estaticos"')
-    os.system("git push origin master")
+    os.system("git push origin production")
     # connect()
     # fetch()
     # ssh.close()
