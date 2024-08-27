@@ -62,18 +62,15 @@ const limiter = rateLimit({
     // store: ... , // Redis, Memcached, etc. See below.
 });
 
-const origin =
-    app.get("env") == "development"
-        ? "http://localhost:7153"
-        : "https://registro-consulta-previa.onrender.com";
-
 // Usa el middleware en tu aplicación
-// if (app.get("env") == "production") {
-// app.use(limiter);
-app.use(restrictToColombia);
-// } else {
-//     app.use(cors({ origin: origin, credentials: true }));
-// }
+if (app.get("env") == "production") {
+    // app.use(limiter);
+    app.use(restrictToColombia);
+}
+
+if (app.get("env") == "development") {
+    app.use(cors({ origin: "http://localhost:7153", credentials: true }));
+}
 
 app.use(logger("dev"));
 app.use(express.json());
