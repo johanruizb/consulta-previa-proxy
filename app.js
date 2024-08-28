@@ -10,7 +10,6 @@ var app = express();
 var indexRouter = require("./routes/index");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
-const net = require("net");
 
 const io = require("@pm2/io");
 
@@ -34,9 +33,6 @@ const restrictToColombia = async (req, res, next) => {
     }
 
     const geo = await geoip.lookup(ip);
-
-    // console.log("IP: ", ip);
-    // console.log("Geo: ", geo);
 
     if (geo?.country === "CO") {
         next(); // Permite el acceso
@@ -65,7 +61,7 @@ const limiter = rateLimit({
 // Usa el middleware en tu aplicación
 if (app.get("env") == "production") {
     // app.use(limiter);
-    app.use(restrictToColombia);
+    // app.use(restrictToColombia);
 }
 
 if (app.get("env") == "development") {
