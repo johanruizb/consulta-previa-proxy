@@ -87,6 +87,8 @@ app.use(
                 path.endsWith(".woff2")
             ) {
                 res.setHeader("Cache-Control", "public, max-age=31536000");
+            } else if (path.endsWith(".html")) {
+                res.setHeader("Cache-Control", "no-store");
             }
         },
     })
