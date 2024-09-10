@@ -16,14 +16,14 @@ const CACHES = {
         }
     },
     save: (key, data) => {
-        if (key.includes("..")) return null;
+        // if (key.includes("..")) return null;
 
-        try {
-            const cache_path = path.join(root, key);
-            fs.writeFileSync(cache_path, JSON.stringify(data));
-        } catch (e) {
-            console.log(e);
-        }
+        // try {
+        //     const cache_path = path.join(root, key);
+        //     fs.writeFileSync(cache_path, JSON.stringify(data));
+        // } catch (e) {
+        //     console.log(e);
+        // }
     },
     delete: (key) => {
         if (key.includes("..")) return null;
