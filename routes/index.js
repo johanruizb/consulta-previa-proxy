@@ -23,7 +23,6 @@ router.get("/countries", async function (req, res, next) {
                 }
             );
             data = await result.json();
-            CACHES.save("countries.json", data);
         }
 
         res.header("Cache-Control", "public, max-age=604800");
@@ -53,7 +52,6 @@ router.get("/countries/:isoCode/states", async function (req, res, next) {
                 }
             );
             data = await result.json();
-            CACHES.save(cacheKey, data);
         }
 
         res.header("Cache-Control", "public, max-age=604800");
@@ -85,7 +83,6 @@ router.get(
                     }
                 );
                 data = await result.json();
-                CACHES.save(cacheKey, data);
             }
             res.header("Cache-Control", "public, max-age=604800");
             res.json(data);
