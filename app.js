@@ -73,22 +73,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(
-    express.static(path.join(__dirname, "dist"), {
-        setHeaders: (res, path) => {
-            if (
-                path.endsWith(".js") ||
-                path.endsWith(".css") ||
-                path.endsWith(".woff") ||
-                path.endsWith(".woff2")
-            ) {
-                res.setHeader("Cache-Control", "public, max-age=31536000");
-            } else if (path.endsWith(".html")) {
-                res.setHeader("Cache-Control", "no-store");
-            }
-        },
-    })
-);
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.use("/v1", indexRouter);
 
