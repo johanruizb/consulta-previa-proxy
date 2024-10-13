@@ -10,7 +10,7 @@ var app = express();
 var indexRouter = require("./routes/index");
 const cors = require("cors");
 const compression = require("compression");
-const ms = require("ms");
+// const ms = require("ms");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -20,7 +20,7 @@ if (app.get("env") == "development") {
     app.use(cors({ origin: "http://localhost:7153", credentials: true }));
 }
 
-const EXT = [".woff", ".png", ".woff2", ".css", ".ico", ".jpg", ".js"];
+// const EXT = [".woff", ".png", ".woff2", ".css", ".ico", ".jpg", ".js"];
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -30,12 +30,12 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
     express.static(path.join(__dirname, "dist"), {
-        setHeaders: function (res, path) {
-            const needCache = EXT.some((ext) => path.endsWith(ext));
-            // console.log(path, needCache);
-            if (needCache)
-                res.setHeader("Cache-Control", "public, max-age=" + ms("1d"));
-        },
+        // setHeaders: function (res, path) {
+        //     const needCache = EXT.some((ext) => path.endsWith(ext));
+        //     // console.log(path, needCache);
+        //     if (needCache)
+        //         res.setHeader("Cache-Control", "public, max-age=" + ms("1d"));
+        // },
     })
 );
 
