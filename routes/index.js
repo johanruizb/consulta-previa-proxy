@@ -55,7 +55,7 @@ router.get("/countries/:isoCode/states", async function (req, res, next) {
         }
 
         res.header("Cache-Control", "public, max-age=604800");
-        res.json(data);
+        res.json(data.sort((a, b) => a.name.localeCompare(b.name)));
     } catch (error) {
         console.error(error);
         next(createError(500));
