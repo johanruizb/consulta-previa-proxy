@@ -15,7 +15,7 @@ router.get("/countries", async function (req, res, next) {
             data = cache;
         } else {
             const result = await fetch(
-                "https://api.countrystatecity.in/v1/countries",
+                "https://panel.consultaprevia.co/api/ubicacion/countries",
                 {
                     headers: {
                         "X-CSCAPI-KEY": process.env.X_CSCAPI_KEY,
@@ -44,7 +44,7 @@ router.get("/countries/:isoCode/states", async function (req, res, next) {
             data = cache;
         } else {
             const result = await fetch(
-                `https://api.countrystatecity.in/v1/countries/${req.params.isoCode}/states`,
+                `https://panel.consultaprevia.co/api/ubicacion/countries/${req.params.isoCode}/states`,
                 {
                     headers: {
                         "X-CSCAPI-KEY": process.env.X_CSCAPI_KEY,
@@ -75,7 +75,7 @@ router.get(
                 data = cache;
             } else {
                 const result = await fetch(
-                    `https://api.countrystatecity.in/v1/countries/${req.params.isoCode}/states/${req.params.stateCode}/cities`,
+                    `https://panel.consultaprevia.co/api/ubicacion/countries/${req.params.isoCode}/states/${req.params.stateCode}/cities`,
                     {
                         headers: {
                             "X-CSCAPI-KEY": process.env.X_CSCAPI_KEY,
