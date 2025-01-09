@@ -2,6 +2,7 @@
     "name": "consulta-previa-proxy",
     "version": "0.0.0",
     "private": true,
+    "homepage": "https://registro.consultaprevia.co",
     "scripts": {
         "start": "node ./bin/www",
         "build": "",
