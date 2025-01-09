@@ -1,4 +1,5 @@
 {
+    "outputDirectory": "dist",
     "version": 2,
     "rewrites": [
         {
