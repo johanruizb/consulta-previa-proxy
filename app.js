@@ -30,6 +30,12 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
     express.static(path.join(__dirname, "dist"), {
+        // disable cache for all files and routes
+        // maxAge: 0,
+        setHeaders: function (res, path) {
+            res.setHeader("Cache-Control", "no-cache");
+            // res.setHeader("Cache-Control", "no-store");
+        },
         // setHeaders: function (res, path) {
         //     const needCache = EXT.some((ext) => path.endsWith(ext));
         //     // console.log(path, needCache);
