@@ -1,4 +1,4 @@
-import{r as f}from"./vendor_react-BO86OV0u.js";var s={};/**
+import{r as f}from"./vendor_react-BJ2hNBYs.js";var s={};/**
  * @license React
  * use-sync-external-store-shim.production.js
  *
