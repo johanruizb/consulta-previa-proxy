@@ -1,4 +1,4 @@
-import{j as r,G as i,n as a,s as y}from"./vendor_react-BDPYDJxQ.js";function u(s){return s==null||Object.keys(s).length===0}function f(s){const{styles:t,defaultTheme:e={}}=s,o=typeof t=="function"?n=>t(u(n)?e:n):t;return r.jsx(i,{styles:o})}/**
+import{j as r,G as i,n as a,s as y}from"./vendor_react-BJ2hNBYs.js";function u(s){return s==null||Object.keys(s).length===0}function f(s){const{styles:t,defaultTheme:e={}}=s,o=typeof t=="function"?n=>t(u(n)?e:n):t;return r.jsx(i,{styles:o})}/**
  * @mui/styled-engine v6.4.0
  *
  * @license MIT
